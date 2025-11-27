@@ -514,10 +514,13 @@
             turnEl.textContent = turn.charAt(0).toUpperCase() + turn.slice(1);
         }
 
+        // Number of moves to undo (player move + AI response)
+        const MOVES_TO_UNDO = 2;
+
         function undoMove() {
-            if (moveHistory.length < 2) return; // Undo both player and AI moves
+            if (moveHistory.length < MOVES_TO_UNDO) return; // Undo both player and AI moves
             
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < MOVES_TO_UNDO; i++) {
                 const last = moveHistory.pop();
                 if (!last) break;
 

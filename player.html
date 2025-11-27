@@ -1307,6 +1307,15 @@
     <script>
         // Music Player Application
         const MusicPlayer = (function() {
+            // Configuration - Update these for different deployments
+            const CONFIG = {
+                GITHUB_REPO_OWNER: 'Actiongotoschool',
+                GITHUB_REPO_NAME: 'robinsons',
+                get GITHUB_ISSUES_URL() {
+                    return `https://github.com/${this.GITHUB_REPO_OWNER}/${this.GITHUB_REPO_NAME}/issues/new`;
+                }
+            };
+
             // State
             let library = { tracks: [], playlists: [] };
             let queue = [];
@@ -1611,7 +1620,7 @@ To approve this upload:
 \`\`\`
                 `);
 
-                const githubIssueUrl = `https://github.com/Actiongotoschool/robinsons/issues/new?title=${issueTitle}&body=${issueBody}&labels=music-upload`;
+                const githubIssueUrl = `${CONFIG.GITHUB_ISSUES_URL}?title=${issueTitle}&body=${issueBody}&labels=music-upload`;
 
                 // Show success modal
                 showUploadSuccessModal(submission, githubIssueUrl);

@@ -828,7 +828,7 @@
             const gamesHTML = config.games.map(gameId => {
                 const game = AVAILABLE_GAMES.find(g => g.id === gameId);
                 return `
-                    <a href="#" class="game-card" onclick="alert('In offline mode, games open in the same file. For full functionality, use the online version.'); return false;">
+                    <a href="#" class="game-card" data-game="${game.id}">
                         <div class="game-icon">${game.emoji}</div>
                         <h2>${game.name}</h2>
                     </a>
@@ -926,6 +926,16 @@
         const savedData = ${JSON.stringify(savedData)};
         Object.entries(savedData).forEach(([key, value]) => {
             if (value) localStorage.setItem('robinsons_' + key.toLowerCase(), value);
+        });
+        
+        // Handle game card clicks
+        function showOfflineMessage(e) {
+            e.preventDefault();
+            alert('In offline mode, games are displayed as previews. For full functionality, use the online version at: https://actiongotoschool.github.io/robinsons');
+        }
+        
+        document.querySelectorAll('.game-card').forEach(function(card) {
+            card.addEventListener('click', showOfflineMessage);
         });
     </script>
 </body>

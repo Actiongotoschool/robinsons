@@ -382,6 +382,11 @@
         }
 
         function checkGuess(guess) {
+            if (!targetWord) {
+                console.error('Game not initialized properly - targetWord is null');
+                return;
+            }
+            
             const row = document.getElementById(`row-${currentRow}`);
             const targetArr = targetWord.split('');
             const guessArr = guess.split('');
