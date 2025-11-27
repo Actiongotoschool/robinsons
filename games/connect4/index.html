@@ -277,6 +277,10 @@
             
             setTimeout(aiMove, 500);
         }
+        // AI difficulty constants
+        const MEDIUM_AI_SMART_PROBABILITY = 0.6;
+        const MEDIUM_AI_DEPTH = 3;
+        const HARD_AI_DEPTH = 5;
 
         function aiMove() {
             if (gameOver) return;
@@ -286,9 +290,9 @@
             if (difficulty === 'easy') {
                 col = getRandomMove();
             } else if (difficulty === 'medium') {
-                col = Math.random() < 0.6 ? getBestMove(3) : getRandomMove();
+                col = Math.random() < MEDIUM_AI_SMART_PROBABILITY ? getBestMove(MEDIUM_AI_DEPTH) : getRandomMove();
             } else {
-                col = getBestMove(5);
+                col = getBestMove(HARD_AI_DEPTH);
             }
             
             const result = dropPiece(col, AI);

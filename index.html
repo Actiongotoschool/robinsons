@@ -228,12 +228,33 @@
         </a>
     </main>
 
+    <!-- Quick Access Bar -->
+    <div class="quick-access-bar">
+        <a href="player.html" class="quick-link">
+            <span class="quick-icon">🎵</span>
+            <span>Music Player</span>
+        </a>
+        <a href="download.html" class="quick-link">
+            <span class="quick-icon">📦</span>
+            <span>Download Builder</span>
+        </a>
+        <button class="quick-link" onclick="RobinsonsArcade.showSettings()">
+            <span class="quick-icon">⚙️</span>
+            <span>Settings</span>
+        </button>
+        <button class="quick-link" onclick="RobinsonsArcade.showAchievements()">
+            <span class="quick-icon">🏆</span>
+            <span>Achievements</span>
+        </button>
+    </div>
+
     <footer>
         <p>© 2024 Robinsons Game Arcade - All games run locally in your browser</p>
         <p style="margin-top: 10px; font-size: 0.85rem;">
             <span id="totalGames">16</span> games available | 
             Press F11 for fullscreen | 
-            <a href="#" onclick="RobinsonsArcade.generateOfflineBundle(); return false;" style="color: var(--accent-primary);">Download for offline use</a>
+            <a href="download.html" style="color: var(--accent-primary);">📦 Download for offline use</a> |
+            <a href="player.html" style="color: var(--accent-primary);">🎵 Music Player</a>
         </p>
     </footer>
 

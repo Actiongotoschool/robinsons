@@ -71,7 +71,8 @@ const RobinsonsArcade = (function() {
         stats: 'robinsons_stats',
         favorites: 'robinsons_favorites',
         recentGames: 'robinsons_recent',
-        gameSaves: 'robinsons_saves'
+        gameSaves: 'robinsons_saves',
+        allGamesPlayed: 'robinsons_all_games_played'
     };
 
     // State
@@ -273,14 +274,20 @@ const RobinsonsArcade = (function() {
         if (recentGames.length > 5) recentGames.pop();
         saveRecentGames();
 
+        // Track all games ever played for achievement
+        let allGamesEverPlayed = JSON.parse(localStorage.getItem(STORAGE_KEYS.allGamesPlayed) || '[]');
+        if (!allGamesEverPlayed.includes(gameId)) {
+            allGamesEverPlayed.push(gameId);
+            localStorage.setItem(STORAGE_KEYS.allGamesPlayed, JSON.stringify(allGamesEverPlayed));
+        }
+
         // Check first game achievement
         if (stats.gamesPlayed === 1) {
             unlockAchievement('firstGame');
         }
 
-        // Check all games achievement
-        const gamesPlayed = new Set(recentGames);
-        if (gamesPlayed.size === Object.keys(GAMES).length) {
+        // Check all games achievement - use persistent tracking
+        if (allGamesEverPlayed.length >= Object.keys(GAMES).length) {
             unlockAchievement('allGames');
         }
 
@@ -380,7 +387,7 @@ const RobinsonsArcade = (function() {
     // Fullscreen
     function toggleFullscreen() {
         if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch(e => console.log(e));
+            document.documentElement.requestFullscreen().catch(e => console.error('Fullscreen error:', e));
         } else {
             document.exitFullscreen();
         }

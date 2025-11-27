@@ -584,7 +584,10 @@
                 `;
                 
                 if (window.RobinsonsArcade) {
-                    const score = Math.max(0, 1000 - seconds - errors * 100);
+                    // Scoring constants
+                    const BASE_SCORE = 1000;
+                    const ERROR_PENALTY = 100;
+                    const score = Math.max(0, BASE_SCORE - seconds - errors * ERROR_PENALTY);
                     RobinsonsArcade.updateHighScore('sudoku', score);
                 }
             } else {

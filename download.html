@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Builder - Robinsons Game Arcade</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+</head>
+<body>
+    <div class="download-builder">
+        <header class="builder-header">
+            <a href="index.html" class="back-link">← Back to Arcade</a>
+            <h1>📦 Custom Download Builder</h1>
+            <p>Create your personalized offline arcade bundle</p>
+        </header>
+
+        <main class="builder-main">
+            <div class="builder-sidebar">
+                <div class="bundle-preview">
+                    <h3>📊 Bundle Preview</h3>
+                    <div class="preview-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="selectedGames">0</span>
+                            <span class="stat-label">Games</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="selectedFeatures">0</span>
+                            <span class="stat-label">Features</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="estimatedSize">~0 KB</span>
+                            <span class="stat-label">Est. Size</span>
+                        </div>
+                    </div>
+                    <div class="preview-list" id="previewList"></div>
+                </div>
+
+                <div class="bundle-actions">
+                    <button id="selectAllBtn" class="action-btn">✓ Select All</button>
+                    <button id="deselectAllBtn" class="action-btn">✕ Deselect All</button>
+                    <button id="downloadBtn" class="action-btn primary large">📥 Generate & Download</button>
+                </div>
+            </div>
+
+            <div class="builder-content">
+                <!-- Games Section -->
+                <section class="builder-section">
+                    <div class="section-header">
+                        <h2>🎮 Games</h2>
+                        <p>Select which games to include in your bundle</p>
+                    </div>
+                    <div class="options-grid" id="gamesGrid">
+                        <!-- Games will be populated here -->
+                    </div>
+                </section>
+
+                <!-- Features Section -->
+                <section class="builder-section">
+                    <div class="section-header">
+                        <h2>⚙️ Features</h2>
+                        <p>Choose which features to include</p>
+                    </div>
+                    <div class="options-list" id="featuresList">
+                        <label class="option-item feature-item">
+                            <input type="checkbox" data-feature="themes" data-size="5" checked>
+                            <div class="option-content">
+                                <span class="option-icon">🎨</span>
+                                <div class="option-info">
+                                    <span class="option-name">Theme System</span>
+                                    <span class="option-desc">6 color themes with live switching</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="option-item feature-item">
+                            <input type="checkbox" data-feature="settings" data-size="3" checked>
+                            <div class="option-content">
+                                <span class="option-icon">⚙️</span>
+                                <div class="option-info">
+                                    <span class="option-name">Settings Panel</span>
+                                    <span class="option-desc">Sound, notifications, auto-save controls</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="option-item feature-item">
+                            <input type="checkbox" data-feature="achievements" data-size="4" checked>
+                            <div class="option-content">
+                                <span class="option-icon">🏆</span>
+                                <div class="option-info">
+                                    <span class="option-name">Achievements & XP</span>
+                                    <span class="option-desc">22 achievements with leveling system</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="option-item feature-item">
+                            <input type="checkbox" data-feature="highscores" data-size="2" checked>
+                            <div class="option-content">
+                                <span class="option-icon">📊</span>
+                                <div class="option-info">
+                                    <span class="option-name">High Score Tracking</span>
+                                    <span class="option-desc">Persistent leaderboards for all games</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="option-item feature-item">
+                            <input type="checkbox" data-feature="favorites" data-size="1" checked>
+                            <div class="option-content">
+                                <span class="option-icon">❤️</span>
+                                <div class="option-info">
+                                    <span class="option-name">Favorites System</span>
+                                    <span class="option-desc">Mark and filter favorite games</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="option-item feature-item">
+                            <input type="checkbox" data-feature="stats" data-size="2" checked>
+                            <div class="option-content">
+                                <span class="option-icon">📈</span>
+                                <div class="option-info">
+                                    <span class="option-name">Statistics Tracking</span>
+                                    <span class="option-desc">Games played, streaks, play time</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="option-item feature-item">
+                            <input type="checkbox" data-feature="profile" data-size="2">
+                            <div class="option-content">
+                                <span class="option-icon">👤</span>
+                                <div class="option-info">
+                                    <span class="option-name">Player Profile</span>
+                                    <span class="option-desc">Custom name and avatar</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Appearance Section -->
+                <section class="builder-section">
+                    <div class="section-header">
+                        <h2>🎨 Appearance</h2>
+                        <p>Customize the look of your bundle</p>
+                    </div>
+                    <div class="appearance-options">
+                        <div class="form-group">
+                            <label for="bundleTitle">Arcade Title</label>
+                            <input type="text" id="bundleTitle" value="Robinsons Game Arcade" placeholder="Your Arcade Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="defaultTheme">Default Theme</label>
+                            <select id="defaultTheme">
+                                <option value="dark">Dark (Default)</option>
+                                <option value="ocean">Ocean</option>
+                                <option value="forest">Forest</option>
+                                <option value="sunset">Sunset</option>
+                                <option value="purple">Purple</option>
+                                <option value="light">Light</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="gridLayout">Game Grid Layout</label>
+                            <select id="gridLayout">
+                                <option value="auto">Auto (Responsive)</option>
+                                <option value="2">2 Columns</option>
+                                <option value="3">3 Columns</option>
+                                <option value="4">4 Columns</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Section -->
+                <section class="builder-section">
+                    <div class="section-header">
+                        <h2>💾 Data Options</h2>
+                        <p>Include existing data in your bundle</p>
+                    </div>
+                    <div class="options-list">
+                        <label class="option-item feature-item">
+                            <input type="checkbox" id="includeHighScores" data-size="1">
+                            <div class="option-content">
+                                <span class="option-icon">🏆</span>
+                                <div class="option-info">
+                                    <span class="option-name">Include Current High Scores</span>
+                                    <span class="option-desc">Bundle your existing high scores</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="option-item feature-item">
+                            <input type="checkbox" id="includeAchievements" data-size="1">
+                            <div class="option-content">
+                                <span class="option-icon">🎖️</span>
+                                <div class="option-info">
+                                    <span class="option-name">Include Unlocked Achievements</span>
+                                    <span class="option-desc">Keep your achievement progress</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="option-item feature-item">
+                            <input type="checkbox" id="includeSettings" data-size="1" checked>
+                            <div class="option-content">
+                                <span class="option-icon">⚙️</span>
+                                <div class="option-info">
+                                    <span class="option-name">Include Current Settings</span>
+                                    <span class="option-desc">Theme, sound preferences, etc.</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Output Format Section -->
+                <section class="builder-section">
+                    <div class="section-header">
+                        <h2>📄 Output Format</h2>
+                        <p>Choose how to package your bundle</p>
+                    </div>
+                    <div class="format-options">
+                        <label class="format-option">
+                            <input type="radio" name="format" value="single" checked>
+                            <div class="format-content">
+                                <span class="format-icon">📄</span>
+                                <div class="format-info">
+                                    <span class="format-name">Single HTML File</span>
+                                    <span class="format-desc">Everything in one portable file</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="format" value="zip">
+                            <div class="format-content">
+                                <span class="format-icon">📦</span>
+                                <div class="format-info">
+                                    <span class="format-name">ZIP Archive</span>
+                                    <span class="format-desc">Organized folder structure</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Progress Modal -->
+        <div id="progressModal" class="progress-modal" style="display: none;">
+            <div class="progress-content">
+                <div class="progress-icon">⏳</div>
+                <h3>Building Your Bundle</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">Preparing files...</p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary, #1a1a2e) 0%, var(--bg-secondary, #16213e) 50%, var(--bg-tertiary, #0f3460) 100%);
+            min-height: 100vh;
+            color: var(--text-primary, #fff);
+        }
+
+        .download-builder {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .builder-header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        .back-link {
+            color: var(--text-secondary, #94a3b8);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-link:hover {
+            color: var(--accent-primary, #3b82f6);
+        }
+
+        .builder-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .builder-header p {
+            color: var(--text-secondary, #94a3b8);
+            font-size: 1.1rem;
+        }
+
+        .builder-main {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .builder-main {
+                grid-template-columns: 1fr;
+            }
+            .builder-sidebar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: var(--bg-card, #1e293b);
+                padding: 15px;
+                z-index: 100;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .bundle-preview {
+                display: none;
+            }
+            .builder-content {
+                padding-bottom: 100px;
+            }
+        }
+
+        /* Sidebar */
+        .builder-sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .bundle-preview {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .bundle-preview h3 {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .preview-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 8px;
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-primary, #3b82f6);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary, #94a3b8);
+        }
+
+        .preview-list {
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 0;
+            color: var(--text-secondary, #94a3b8);
+        }
+
+        .bundle-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary, #fff);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .action-btn.primary {
+            background: var(--accent-primary, #3b82f6);
+        }
+
+        .action-btn.primary:hover {
+            background: #2563eb;
+        }
+
+        .action-btn.large {
+            padding: 16px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Content */
+        .builder-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-header {
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary, #94a3b8);
+            font-size: 0.9rem;
+        }
+
+        /* Games Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .option-item:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .option-item:has(input:checked) {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--accent-primary, #3b82f6);
+        }
+
+        .option-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .option-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .option-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .option-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .option-name {
+            font-weight: 600;
+        }
+
+        .option-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary, #94a3b8);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .feature-item .option-content {
+            flex: 1;
+        }
+
+        /* Appearance Options */
+        .appearance-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary, #94a3b8);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-primary, #fff);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-primary, #3b82f6);
+        }
+
+        /* Format Options */
+        .format-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .format-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .format-option:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .format-option:has(input:checked) {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--accent-primary, #3b82f6);
+        }
+
+        .format-option input {
+            width: 20px;
+            height: 20px;
+        }
+
+        .format-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .format-icon {
+            font-size: 2.5rem;
+        }
+
+        .format-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .format-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .format-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary, #94a3b8);
+        }
+
+        /* Progress Modal */
+        .progress-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .progress-content {
+            background: var(--bg-card, #1e293b);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .progress-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .progress-content h3 {
+            margin-bottom: 25px;
+        }
+
+        .progress-bar-container {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent-primary, #3b82f6);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        #progressText {
+            color: var(--text-secondary, #94a3b8);
+        }
+    </style>
+
+    <script src="js/arcade.js"></script>
+    <script>
+        // Game definitions for the builder
+        const AVAILABLE_GAMES = [
+            { id: 'snake', name: 'Snake', emoji: '🐍', size: 15 },
+            { id: 'tetris', name: 'Tetris', emoji: '🧱', size: 20 },
+            { id: 'memory', name: 'Memory Match', emoji: '🃏', size: 12 },
+            { id: 'pong', name: 'Pong', emoji: '🏓', size: 10 },
+            { id: 'tictactoe', name: 'Tic-Tac-Toe', emoji: '⭕', size: 12 },
+            { id: '2048', name: '2048', emoji: '🔢', size: 15 },
+            { id: 'breakout', name: 'Breakout', emoji: '🧱', size: 12 },
+            { id: 'flappybird', name: 'Flappy Bird', emoji: '🐦', size: 10 },
+            { id: 'minesweeper', name: 'Minesweeper', emoji: '💣', size: 12 },
+            { id: 'spaceinvaders', name: 'Space Invaders', emoji: '👾', size: 15 },
+            { id: 'wordle', name: 'Word Guess', emoji: '📝', size: 20 },
+            { id: 'sudoku', name: 'Sudoku', emoji: '🔢', size: 22 },
+            { id: 'chess', name: 'Chess', emoji: '♟️', size: 30 },
+            { id: 'simon', name: 'Simon Says', emoji: '🔴', size: 12 },
+            { id: 'dino', name: 'Dino Run', emoji: '🦖', size: 14 },
+            { id: 'connect4', name: 'Connect Four', emoji: '🔴', size: 18 }
+        ];
+
+        // Initialize games grid
+        function initGamesGrid() {
+            const grid = document.getElementById('gamesGrid');
+            grid.innerHTML = AVAILABLE_GAMES.map(game => `
+                <label class="option-item game-item">
+                    <input type="checkbox" data-game="${game.id}" data-size="${game.size}" checked>
+                    <div class="option-content">
+                        <span class="option-icon">${game.emoji}</span>
+                        <div class="option-info">
+                            <span class="option-name">${game.name}</span>
+                            <span class="option-desc">~${game.size} KB</span>
+                        </div>
+                    </div>
+                </label>
+            `).join('');
+        }
+
+        // Update preview
+        function updatePreview() {
+            const selectedGames = document.querySelectorAll('.game-item input:checked');
+            const selectedFeatures = document.querySelectorAll('.feature-item input:checked');
+            
+            let totalSize = 50; // Base size
+            
+            selectedGames.forEach(input => {
+                totalSize += parseInt(input.dataset.size) || 0;
+            });
+            
+            selectedFeatures.forEach(input => {
+                totalSize += parseInt(input.dataset.size) || 0;
+            });
+
+            document.getElementById('selectedGames').textContent = selectedGames.length;
+            document.getElementById('selectedFeatures').textContent = selectedFeatures.length;
+            document.getElementById('estimatedSize').textContent = `~${totalSize} KB`;
+
+            // Update preview list
+            const previewList = document.getElementById('previewList');
+            let items = [];
+            
+            selectedGames.forEach(input => {
+                const game = AVAILABLE_GAMES.find(g => g.id === input.dataset.game);
+                if (game) {
+                    items.push(`<div class="preview-item">${game.emoji} ${game.name}</div>`);
+                }
+            });
+            
+            previewList.innerHTML = items.slice(0, 8).join('') + 
+                (items.length > 8 ? `<div class="preview-item">... and ${items.length - 8} more</div>` : '');
+        }
+
+        // Select all
+        document.getElementById('selectAllBtn').addEventListener('click', () => {
+            document.querySelectorAll('.game-item input, .feature-item input').forEach(input => {
+                input.checked = true;
+            });
+            updatePreview();
+        });
+
+        // Deselect all
+        document.getElementById('deselectAllBtn').addEventListener('click', () => {
+            document.querySelectorAll('.game-item input').forEach(input => {
+                input.checked = false;
+            });
+            updatePreview();
+        });
+
+        // Generate bundle
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const modal = document.getElementById('progressModal');
+            const fill = document.getElementById('progressFill');
+            const text = document.getElementById('progressText');
+            
+            modal.style.display = 'flex';
+            
+            // Get selections
+            const selectedGames = [...document.querySelectorAll('.game-item input:checked')].map(i => i.dataset.game);
+            const selectedFeatures = [...document.querySelectorAll('.feature-item input:checked')].map(i => i.dataset.feature);
+            const format = document.querySelector('input[name="format"]:checked').value;
+            const bundleTitle = document.getElementById('bundleTitle').value || 'Robinsons Game Arcade';
+            const defaultTheme = document.getElementById('defaultTheme').value;
+            const includeHighScores = document.getElementById('includeHighScores').checked;
+            const includeAchievements = document.getElementById('includeAchievements').checked;
+            const includeSettings = document.getElementById('includeSettings').checked;
+
+            if (selectedGames.length === 0) {
+                alert('Please select at least one game!');
+                modal.style.display = 'none';
+                return;
+            }
+
+            // Simulate progress
+            fill.style.width = '10%';
+            text.textContent = 'Gathering game files...';
+            await sleep(500);
+
+            fill.style.width = '30%';
+            text.textContent = 'Building game components...';
+            await sleep(500);
+
+            fill.style.width = '50%';
+            text.textContent = 'Applying customizations...';
+            await sleep(500);
+
+            fill.style.width = '70%';
+            text.textContent = 'Bundling assets...';
+            await sleep(500);
+
+            fill.style.width = '90%';
+            text.textContent = 'Generating download...';
+            await sleep(300);
+
+            // Generate the bundle
+            const bundle = generateBundle({
+                games: selectedGames,
+                features: selectedFeatures,
+                title: bundleTitle,
+                theme: defaultTheme,
+                includeHighScores,
+                includeAchievements,
+                includeSettings
+            });
+
+            fill.style.width = '100%';
+            text.textContent = 'Complete!';
+            await sleep(300);
+
+            // Download
+            const blob = new Blob([bundle], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'robinsons-arcade-custom.html';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            modal.style.display = 'none';
+        });
+
+        function generateBundle(config) {
+            const gamesHTML = config.games.map(gameId => {
+                const game = AVAILABLE_GAMES.find(g => g.id === gameId);
+                return `
+                    <a href="#" class="game-card" onclick="alert('In offline mode, games open in the same file. For full functionality, use the online version.'); return false;">
+                        <div class="game-icon">${game.emoji}</div>
+                        <h2>${game.name}</h2>
+                    </a>
+                `;
+            }).join('');
+
+            const savedData = {};
+            if (config.includeHighScores && window.RobinsonsArcade) {
+                savedData.highScores = localStorage.getItem('robinsons_highscores') || '{}';
+            }
+            if (config.includeAchievements && window.RobinsonsArcade) {
+                savedData.achievements = localStorage.getItem('robinsons_achievements') || '{}';
+            }
+            if (config.includeSettings && window.RobinsonsArcade) {
+                savedData.settings = localStorage.getItem('robinsons_settings') || '{}';
+            }
+
+            return `<!DOCTYPE html>
+<html lang="en" data-theme="${config.theme}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${config.title}</title>
+    <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-tertiary: #0f3460;
+            --bg-card: #1e293b;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+        }
+        [data-theme="ocean"] { --bg-primary: #0c4a6e; --bg-secondary: #075985; --bg-tertiary: #0369a1; }
+        [data-theme="forest"] { --bg-primary: #14532d; --bg-secondary: #166534; --bg-tertiary: #15803d; }
+        [data-theme="sunset"] { --bg-primary: #7c2d12; --bg-secondary: #9a3412; --bg-tertiary: #c2410c; }
+        [data-theme="purple"] { --bg-primary: #3b0764; --bg-secondary: #581c87; --bg-tertiary: #6b21a8; }
+        [data-theme="light"] { --bg-primary: #f1f5f9; --bg-secondary: #e2e8f0; --text-primary: #1e293b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), var(--bg-tertiary));
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        header { text-align: center; padding: 40px 20px; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .tagline { color: var(--text-secondary); }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .game-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: transform 0.3s;
+        }
+        .game-card:hover { transform: translateY(-5px); }
+        .game-icon { font-size: 4rem; margin-bottom: 15px; }
+        footer { text-align: center; padding: 30px; color: var(--text-secondary); }
+        .offline-badge {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎮 ${config.title}</h1>
+        <p class="tagline">Custom Offline Arcade Bundle</p>
+        <span class="offline-badge">📴 Offline Ready</span>
+    </header>
+    <main class="game-grid">
+        ${gamesHTML}
+    </main>
+    <footer>
+        <p>Generated from Robinsons Game Arcade</p>
+        <p>Games included: ${config.games.length} | Generated: ${new Date().toLocaleDateString()}</p>
+    </footer>
+    <script>
+        // Restore saved data
+        const savedData = ${JSON.stringify(savedData)};
+        Object.entries(savedData).forEach(([key, value]) => {
+            if (value) localStorage.setItem('robinsons_' + key.toLowerCase(), value);
+        });
+    </script>
+</body>
+</html>`;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Event listeners for updates
+        document.addEventListener('change', (e) => {
+            if (e.target.matches('.game-item input, .feature-item input')) {
+                updatePreview();
+            }
+        });
+
+        // Initialize
+        initGamesGrid();
+        updatePreview();
+    </script>
+</body>
+</html>
