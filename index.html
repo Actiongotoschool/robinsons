@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robinsons Game Arcade</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+</head>
+<body>
+    <!-- Settings Button -->
+    <button class="settings-btn" title="Settings">⚙️</button>
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" title="Toggle Fullscreen">⛶</button>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel">
+        <h2>
+            <span>⚙️ Settings</span>
+            <button class="close-btn">✕</button>
+        </h2>
+
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-avatar">🎮</div>
+            <div class="profile-info">
+                <div class="profile-name">Player</div>
+                <div class="profile-level">Level 1</div>
+                <div class="profile-xp">
+                    <div class="profile-xp-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Theme Section -->
+        <div class="settings-section">
+            <h3>🎨 Theme</h3>
+            <div class="theme-grid">
+                <button class="theme-btn active" data-theme="dark">Dark</button>
+                <button class="theme-btn" data-theme="ocean">Ocean</button>
+                <button class="theme-btn" data-theme="forest">Forest</button>
+                <button class="theme-btn" data-theme="sunset">Sunset</button>
+                <button class="theme-btn" data-theme="purple">Purple</button>
+                <button class="theme-btn" data-theme="light">Light</button>
+            </div>
+        </div>
+
+        <!-- Toggle Settings -->
+        <div class="settings-section">
+            <h3>🔧 Options</h3>
+            <div class="toggle-setting">
+                <label>🔊 Sound Effects</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" data-setting="soundEnabled" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-setting">
+                <label>🔔 Notifications</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" data-setting="notifications" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-setting">
+                <label>💾 Auto-Save</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" data-setting="autoSave" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="settings-section">
+            <h3>📊 Your Stats</h3>
+            <div class="stats-grid"></div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="settings-section">
+            <h3>🏆 Achievements</h3>
+            <div class="achievements-grid"></div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="settings-section download-section">
+            <h3>📥 Backup & Export</h3>
+            <button class="download-btn">💾 Download Data Backup</button>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 10px;">
+                Save your progress, high scores, and achievements
+            </p>
+        </div>
+    </div>
+
+    <header>
+        <h1>🎮 Robinsons Game Arcade</h1>
+        <p class="tagline">Play classic games right in your browser!</p>
+    </header>
+
+    <!-- Recently Played Section -->
+    <section class="recent-section" style="padding: 0 40px; max-width: 1400px; margin: 0 auto;">
+        <h2 style="margin-bottom: 15px; color: var(--accent-primary);">🕐 Recently Played</h2>
+        <div class="recent-games"></div>
+    </section>
+
+    <!-- High Scores Section -->
+    <section class="highscores-section">
+        <h2>🏆 High Scores</h2>
+        <div class="highscore-list"></div>
+    </section>
+
+    <main class="game-grid">
+        <a href="games/snake/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('snake')">
+            <button class="favorite-btn" data-game="snake">🤍</button>
+            <div class="game-icon">🐍</div>
+            <h2>Snake</h2>
+            <p>Classic snake game - eat food and grow longer!</p>
+        </a>
+
+        <a href="games/tetris/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('tetris')">
+            <button class="favorite-btn" data-game="tetris">🤍</button>
+            <div class="game-icon">🧱</div>
+            <h2>Tetris</h2>
+            <p>Stack falling blocks and clear lines!</p>
+        </a>
+
+        <a href="games/memory/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('memory')">
+            <button class="favorite-btn" data-game="memory">🤍</button>
+            <div class="game-icon">🃏</div>
+            <h2>Memory Match</h2>
+            <p>Flip cards and find matching pairs!</p>
+        </a>
+
+        <a href="games/pong/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('pong')">
+            <button class="favorite-btn" data-game="pong">🤍</button>
+            <div class="game-icon">🏓</div>
+            <h2>Pong</h2>
+            <p>Classic paddle game vs AI opponent!</p>
+        </a>
+
+        <a href="games/tictactoe/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('tictactoe')">
+            <button class="favorite-btn" data-game="tictactoe">🤍</button>
+            <div class="game-icon">⭕</div>
+            <h2>Tic-Tac-Toe</h2>
+            <p>Play against a smart AI opponent!</p>
+        </a>
+
+        <a href="games/2048/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('2048')">
+            <button class="favorite-btn" data-game="2048">🤍</button>
+            <div class="game-icon">🔢</div>
+            <h2>2048</h2>
+            <p>Slide tiles and reach 2048!</p>
+        </a>
+
+        <a href="games/breakout/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('breakout')">
+            <button class="favorite-btn" data-game="breakout">🤍</button>
+            <div class="game-icon">🧱</div>
+            <h2>Breakout</h2>
+            <p>Smash bricks with a bouncing ball!</p>
+        </a>
+
+        <a href="games/flappybird/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('flappybird')">
+            <button class="favorite-btn" data-game="flappybird">🤍</button>
+            <div class="game-icon">🐦</div>
+            <h2>Flappy Bird</h2>
+            <p>Tap to fly through the pipes!</p>
+        </a>
+
+        <a href="games/minesweeper/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('minesweeper')">
+            <button class="favorite-btn" data-game="minesweeper">🤍</button>
+            <div class="game-icon">💣</div>
+            <h2>Minesweeper</h2>
+            <p>Clear the board without hitting mines!</p>
+        </a>
+
+        <a href="games/spaceinvaders/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('spaceinvaders')">
+            <button class="favorite-btn" data-game="spaceinvaders">🤍</button>
+            <div class="game-icon">👾</div>
+            <h2>Space Invaders</h2>
+            <p>Defend Earth from alien invasion!</p>
+        </a>
+
+        <a href="games/wordle/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('wordle')">
+            <button class="favorite-btn" data-game="wordle">🤍</button>
+            <div class="game-icon">📝</div>
+            <h2>Word Guess</h2>
+            <p>Guess the 5-letter word in 6 tries!</p>
+        </a>
+
+        <a href="games/sudoku/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('sudoku')">
+            <button class="favorite-btn" data-game="sudoku">🤍</button>
+            <div class="game-icon">🔢</div>
+            <h2>Sudoku</h2>
+            <p>Fill the grid with numbers 1-9!</p>
+        </a>
+
+        <a href="games/chess/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('chess')">
+            <button class="favorite-btn" data-game="chess">🤍</button>
+            <div class="game-icon">♟️</div>
+            <h2>Chess</h2>
+            <p>Classic strategy game vs AI!</p>
+        </a>
+
+        <a href="games/simon/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('simon')">
+            <button class="favorite-btn" data-game="simon">🤍</button>
+            <div class="game-icon">🔴</div>
+            <h2>Simon Says</h2>
+            <p>Remember and repeat the pattern!</p>
+        </a>
+
+        <a href="games/dino/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('dino')">
+            <button class="favorite-btn" data-game="dino">🤍</button>
+            <div class="game-icon">🦖</div>
+            <h2>Dino Run</h2>
+            <p>Jump over obstacles in the desert!</p>
+        </a>
+
+        <a href="games/connect4/index.html" class="game-card" onclick="RobinsonsArcade.recordGamePlayed('connect4')">
+            <button class="favorite-btn" data-game="connect4">🤍</button>
+            <div class="game-icon">🔴</div>
+            <h2>Connect Four</h2>
+            <p>Get 4 in a row to win!</p>
+        </a>
+    </main>
+
+    <!-- Quick Access Bar -->
+    <div class="quick-access-bar">
+        <a href="player.html" class="quick-link">
+            <span class="quick-icon">🎵</span>
+            <span>Music Player</span>
+        </a>
+        <a href="download.html" class="quick-link">
+            <span class="quick-icon">📦</span>
+            <span>Download Builder</span>
+        </a>
+        <button class="quick-link" onclick="RobinsonsArcade.showSettings()">
+            <span class="quick-icon">⚙️</span>
+            <span>Settings</span>
+        </button>
+        <button class="quick-link" onclick="RobinsonsArcade.showAchievements()">
+            <span class="quick-icon">🏆</span>
+            <span>Achievements</span>
+        </button>
+    </div>
+
+    <footer>
+        <p>© 2024 Robinsons Game Arcade - All games run locally in your browser</p>
+        <p style="margin-top: 10px; font-size: 0.85rem;">
+            <span id="totalGames">16</span> games available | 
+            Press F11 for fullscreen | 
+            <a href="download.html" style="color: var(--accent-primary);">📦 Download for offline use</a> |
+            <a href="player.html" style="color: var(--accent-primary);">🎵 Music Player</a>
+        </p>
+    </footer>
+
+    <script src="js/arcade.js"></script>
+</body>
+</html>

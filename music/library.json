@@ -1,0 +1,60 @@
+{
+  "library": {
+    "name": "Robinsons Arcade Music",
+    "version": "1.0",
+    "tracks": [
+      {
+        "id": "sample-1",
+        "title": "Arcade Dreams",
+        "artist": "Pixel Beats",
+        "album": "Retro Gaming",
+        "duration": 180,
+        "genre": "Electronic",
+        "year": 2024,
+        "file": "sample-arcade-dreams.flac",
+        "cover": "covers/arcade-dreams.jpg"
+      },
+      {
+        "id": "sample-2",
+        "title": "8-Bit Adventure",
+        "artist": "Chiptune Masters",
+        "album": "Retro Gaming",
+        "duration": 210,
+        "genre": "Chiptune",
+        "year": 2024,
+        "file": "sample-8bit-adventure.flac",
+        "cover": "covers/8bit-adventure.jpg"
+      },
+      {
+        "id": "sample-3",
+        "title": "Game Over Theme",
+        "artist": "Pixel Beats",
+        "album": "Retro Gaming",
+        "duration": 145,
+        "genre": "Electronic",
+        "year": 2024,
+        "file": "sample-game-over.flac",
+        "cover": "covers/game-over.jpg"
+      }
+    ],
+    "playlists": [
+      {
+        "id": "gaming",
+        "name": "Gaming Vibes",
+        "description": "Perfect music for gaming sessions",
+        "tracks": ["sample-1", "sample-2", "sample-3"]
+      },
+      {
+        "id": "chill",
+        "name": "Chill & Relax",
+        "description": "Relaxing tunes",
+        "tracks": ["sample-1", "sample-3"]
+      }
+    ]
+  },
+  "instructions": {
+    "addingTracks": "Add your audio files to this folder and update this JSON file with track metadata",
+    "supportedFormats": ["flac", "mp3", "wav", "ogg", "m4a", "aac"],
+    "coverImages": "Place cover art in the 'covers' subfolder"
+  }
+}
