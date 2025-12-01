@@ -53,8 +53,9 @@
     ]
   },
   "instructions": {
-    "addingTracks": "Add your audio files to this folder and update this JSON file with track metadata",
+    "addingTracks": "Add audio files to this folder using 'Artist - Title.ext' naming format, then run 'node scripts/update-music-library.js' to auto-update this file",
     "supportedFormats": ["flac", "mp3", "wav", "ogg", "m4a", "aac"],
-    "coverImages": "Place cover art in the 'covers' subfolder"
+    "coverImages": "Place cover art in the 'covers' subfolder",
+    "autoUpdate": "Run 'node scripts/update-music-library.js' from the repository root to automatically scan for new tracks"
   }
 }
