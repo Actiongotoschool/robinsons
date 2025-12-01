@@ -86,7 +86,7 @@ function createTrackEntry(filename) {
         album: '',
         duration: 0, // Duration would require audio parsing library
         genre: '',
-        year: new Date().getFullYear(),
+        year: null, // Year is unknown without metadata parsing
         file: filename,
         cover: ''
     };
@@ -188,14 +188,16 @@ function updateLibrary() {
         }
     }
     
-    // Also keep any tracks without a file (placeholder tracks from original library)
+    // Track IDs already added to avoid duplicates
+    const addedTrackIds = new Set(newTracks.map(t => t.id));
+    
+    // Also keep any sample/placeholder tracks from original library
     for (const track of existingTracks) {
-        if (!track.file || !audioFiles.includes(track.file)) {
-            // Check if this is a sample/placeholder track we should keep
-            if (track.id && track.id.startsWith('sample-')) {
-                newTracks.push(track);
-                console.log(`⚠ Kept placeholder: ${track.title} (sample track without file)`);
-            }
+        // Check if this is a sample/placeholder track we should keep
+        if (track.id && track.id.startsWith('sample-') && !addedTrackIds.has(track.id)) {
+            newTracks.push(track);
+            addedTrackIds.add(track.id);
+            console.log(`⚠ Kept placeholder: ${track.title} (sample track without file)`);
         }
     }
     
