@@ -8,6 +8,8 @@ on:
 jobs:
   update-music:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -15,7 +17,6 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
           node-version: '18'
           cache: 'npm'
 
