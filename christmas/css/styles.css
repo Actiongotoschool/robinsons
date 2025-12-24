@@ -1,0 +1,1356 @@
+/* Christmas Website Styles */
+
+:root {
+    --christmas-red: #c41e3a;
+    --christmas-green: #0f7d3e;
+    --christmas-gold: #ffd700;
+    --christmas-white: #ffffff;
+    --christmas-snow: #f0f8ff;
+    --christmas-dark-green: #0a5028;
+    --christmas-dark-red: #8b0000;
+    --christmas-light-gold: #fff8dc;
+    --bg-overlay: rgba(0, 0, 0, 0.7);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a5028 0%, #1a1a2e 100%);
+    color: var(--christmas-white);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Snowfall Animation */
+.snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: var(--christmas-white);
+    font-size: 1.5em;
+    animation: snowfall linear infinite;
+    opacity: 0.8;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+.snowflake:nth-child(1) { left: 5%; animation-duration: 10s; animation-delay: 0s; }
+.snowflake:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 1s; font-size: 2em; }
+.snowflake:nth-child(3) { left: 25%; animation-duration: 8s; animation-delay: 2s; }
+.snowflake:nth-child(4) { left: 35%; animation-duration: 14s; animation-delay: 0.5s; font-size: 1.8em; }
+.snowflake:nth-child(5) { left: 45%; animation-duration: 11s; animation-delay: 1.5s; }
+.snowflake:nth-child(6) { left: 55%; animation-duration: 9s; animation-delay: 2.5s; font-size: 2.2em; }
+.snowflake:nth-child(7) { left: 65%; animation-duration: 13s; animation-delay: 3s; }
+.snowflake:nth-child(8) { left: 75%; animation-duration: 10s; animation-delay: 0.8s; font-size: 1.6em; }
+.snowflake:nth-child(9) { left: 85%; animation-duration: 12s; animation-delay: 1.8s; }
+.snowflake:nth-child(10) { left: 95%; animation-duration: 11s; animation-delay: 2.8s; font-size: 1.9em; }
+.snowflake:nth-child(11) { left: 10%; animation-duration: 9s; animation-delay: 3.5s; }
+.snowflake:nth-child(12) { left: 90%; animation-duration: 14s; animation-delay: 1.2s; font-size: 2.1em; }
+
+@keyframes snowfall {
+    0% {
+        top: -10px;
+        transform: translateX(0px);
+    }
+    100% {
+        top: 100vh;
+        transform: translateX(50px);
+    }
+}
+
+/* Navigation */
+.christmas-nav {
+    background: linear-gradient(90deg, var(--christmas-dark-red), var(--christmas-red));
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 20px rgba(196, 30, 58, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--christmas-white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.music-toggle {
+    background: var(--christmas-gold);
+    color: var(--christmas-dark-red);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.music-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
+}
+
+.music-toggle.playing {
+    background: var(--christmas-green);
+    color: var(--christmas-white);
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(15, 125, 62, 0.3), rgba(196, 30, 58, 0.3));
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+}
+
+.twinkle {
+    display: inline-block;
+    animation: twinkleAnimation 1.5s ease-in-out infinite;
+}
+
+@keyframes twinkleAnimation {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    color: var(--christmas-light-gold);
+}
+
+/* Countdown Timer */
+.countdown-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.countdown-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--christmas-gold);
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, var(--christmas-red), var(--christmas-dark-red));
+    padding: 1.5rem;
+    border-radius: 15px;
+    min-width: 120px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.countdown-value {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--christmas-gold);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.countdown-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    color: var(--christmas-white);
+}
+
+.christmas-message {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    color: var(--christmas-gold);
+    font-weight: bold;
+    animation: messageGlow 2s ease-in-out infinite;
+}
+
+@keyframes messageGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Christmas Tree */
+.christmas-tree-container {
+    margin: 3rem auto;
+    display: flex;
+    justify-content: center;
+}
+
+.christmas-tree {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tree-star {
+    font-size: 3rem;
+    margin-bottom: -10px;
+    animation: starTwinkle 1s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+}
+
+@keyframes starTwinkle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+}
+
+.tree-part {
+    font-size: 5rem;
+    color: var(--christmas-green);
+    position: relative;
+    margin: -15px 0;
+}
+
+.tree-top {
+    font-size: 4rem;
+}
+
+.tree-middle {
+    font-size: 6rem;
+}
+
+.tree-bottom {
+    font-size: 8rem;
+}
+
+.ornament {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: ornamentSwing 3s ease-in-out infinite;
+}
+
+@keyframes ornamentSwing {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.tree-trunk {
+    width: 60px;
+    height: 80px;
+    background: #8B4513;
+    border-radius: 5px;
+    margin-top: -20px;
+}
+
+/* Main Content */
+.main-content {
+    padding: 2rem;
+}
+
+.section {
+    margin: 4rem 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--christmas-gold);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    color: var(--christmas-light-gold);
+}
+
+/* Advent Calendar */
+.advent-calendar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.advent-door {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--christmas-red), var(--christmas-dark-red));
+    border: 3px solid var(--christmas-gold);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.advent-door:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+}
+
+.advent-door.opened {
+    background: linear-gradient(135deg, var(--christmas-green), var(--christmas-dark-green));
+}
+
+.advent-door.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.door-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--christmas-white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.door-icon {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.door-surprise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    animation: surpriseReveal 0.5s ease-out;
+}
+
+@keyframes surpriseReveal {
+    from {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+/* Activities Grid */
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.activity-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.activity-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+    border-color: var(--christmas-gold);
+}
+
+.activity-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.activity-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--christmas-gold);
+}
+
+.activity-card p {
+    font-size: 1rem;
+    color: var(--christmas-light-gold);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.activity-btn {
+    background: linear-gradient(90deg, var(--christmas-red), var(--christmas-dark-red));
+    color: var(--christmas-white);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
+}
+
+.activity-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(196, 30, 58, 0.6);
+}
+
+/* Stories Section */
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.story-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--christmas-gold);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+.story-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.story-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--christmas-gold);
+}
+
+.story-card p {
+    line-height: 1.6;
+    color: var(--christmas-light-gold);
+}
+
+/* Recipes Section */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.recipe-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--christmas-gold);
+}
+
+.recipe-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.recipe-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--christmas-gold);
+}
+
+.recipe-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.recipe-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    color: var(--christmas-light-gold);
+}
+
+.recipe-card li:before {
+    content: "✓ ";
+    color: var(--christmas-green);
+    font-weight: bold;
+}
+
+/* Music Player */
+.music-player {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.now-playing {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.vinyl-record {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #1a1a1a 30%, #000 70%);
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 3s linear infinite paused;
+}
+
+.vinyl-record.playing {
+    animation-play-state: running;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.vinyl-groove {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: var(--christmas-gold);
+    border-radius: 50%;
+}
+
+.song-info h3 {
+    font-size: 1.5rem;
+    color: var(--christmas-gold);
+    margin-bottom: 0.5rem;
+}
+
+.song-info p {
+    color: var(--christmas-light-gold);
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.control-btn {
+    background: linear-gradient(135deg, var(--christmas-red), var(--christmas-dark-red));
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(196, 30, 58, 0.6);
+}
+
+.play-btn {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--christmas-green), var(--christmas-dark-green));
+}
+
+.playlist {
+    margin-top: 2rem;
+}
+
+.playlist-item {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playlist-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.playlist-item.active {
+    background: rgba(255, 215, 0, 0.2);
+    border-left: 4px solid var(--christmas-gold);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, var(--christmas-dark-green), var(--christmas-dark-red));
+    padding: 2rem;
+    border-radius: 20px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 3px solid var(--christmas-gold);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: scale(0.8) translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: var(--christmas-white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+}
+
+.close-modal:hover {
+    transform: rotate(90deg);
+    background: var(--christmas-red);
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: var(--christmas-gold);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+/* Tree Decorator */
+.decorator-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.decorator-tree {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.decorator-tree-shape {
+    font-size: 15rem;
+    filter: drop-shadow(0 0 20px rgba(15, 125, 62, 0.5));
+}
+
+.decorator-star {
+    position: absolute;
+    top: -20px;
+    font-size: 3rem;
+    animation: starTwinkle 1s ease-in-out infinite;
+}
+
+.placed-ornament {
+    position: absolute;
+    font-size: 2rem;
+    cursor: move;
+    transition: transform 0.2s ease;
+    animation: ornamentPlace 0.3s ease-out;
+}
+
+@keyframes ornamentPlace {
+    from {
+        transform: scale(0) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.placed-ornament:hover {
+    transform: scale(1.2);
+}
+
+.decorator-options {
+    flex: 1;
+    min-width: 250px;
+}
+
+.decorator-options h3 {
+    color: var(--christmas-gold);
+    margin-bottom: 1rem;
+}
+
+.ornament-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.ornament-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ornament-btn:hover {
+    transform: scale(1.1);
+    border-color: var(--christmas-gold);
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.clear-btn, .save-btn, .send-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-btn {
+    background: var(--christmas-red);
+    color: white;
+}
+
+.save-btn {
+    background: var(--christmas-green);
+    color: white;
+}
+
+.send-btn {
+    background: var(--christmas-gold);
+    color: var(--christmas-dark-red);
+}
+
+.clear-btn:hover, .save-btn:hover, .send-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Letter Form */
+.letter-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--christmas-gold);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    cursor: pointer;
+}
+
+/* Card Creator */
+.card-creator {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-preview {
+    width: 400px;
+    height: 500px;
+    background: linear-gradient(135deg, white, #f0f8ff);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.card-content {
+    text-align: center;
+}
+
+.card-emoji {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.card-preview h3 {
+    font-size: 2rem;
+    color: var(--christmas-red);
+    margin-bottom: 1rem;
+}
+
+.card-preview p {
+    font-size: 1.2rem;
+    color: var(--christmas-dark-green);
+    margin-bottom: 0.5rem;
+}
+
+.card-from {
+    font-style: italic;
+    margin-top: 2rem;
+    color: var(--christmas-gold);
+}
+
+.card-options {
+    flex: 1;
+    min-width: 300px;
+}
+
+.emoji-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.emoji-options button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.emoji-options button:hover {
+    transform: scale(1.1);
+    border-color: var(--christmas-gold);
+}
+
+/* Wish List */
+.wishlist-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.add-wish {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.add-wish input {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+}
+
+.add-wish button {
+    padding: 1rem 2rem;
+    background: var(--christmas-green);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.add-wish button:hover {
+    transform: scale(1.05);
+}
+
+.wish-list {
+    list-style: none;
+}
+
+.wish-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border-left: 4px solid var(--christmas-gold);
+}
+
+.wish-item .delete-btn {
+    background: var(--christmas-red);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.wish-item .delete-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Trivia */
+.trivia-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.trivia-score {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--christmas-gold);
+    margin-bottom: 2rem;
+}
+
+.trivia-question {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+    text-align: center;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.trivia-options {
+    display: grid;
+    gap: 1rem;
+}
+
+.trivia-option {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.trivia-option:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateX(10px);
+}
+
+.trivia-option.correct {
+    background: rgba(15, 125, 62, 0.5);
+    border-color: var(--christmas-green);
+}
+
+.trivia-option.incorrect {
+    background: rgba(196, 30, 58, 0.5);
+    border-color: var(--christmas-red);
+}
+
+.trivia-result {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.trivia-result.correct {
+    background: rgba(15, 125, 62, 0.3);
+    color: var(--christmas-green);
+}
+
+.trivia-result.incorrect {
+    background: rgba(196, 30, 58, 0.3);
+    color: var(--christmas-red);
+}
+
+.next-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2rem;
+    background: var(--christmas-gold);
+    color: var(--christmas-dark-red);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.next-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Gingerbread */
+.gingerbread-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gingerbread-canvas {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.gingerbread-person {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    background: #8B4513;
+    border-radius: 50px;
+    border: 3px solid #654321;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.gb-head {
+    width: 80px;
+    height: 80px;
+    background: #8B4513;
+    border-radius: 50%;
+    border: 3px solid #654321;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.gb-eye {
+    position: absolute;
+    font-size: 1rem;
+    top: 20px;
+}
+
+.gb-eye.left { left: 15px; }
+.gb-eye.right { right: 15px; }
+
+.gb-mouth {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+}
+
+.gb-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.gb-button {
+    font-size: 1.5rem;
+}
+
+.gb-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gb-decoration {
+    position: absolute;
+    font-size: 2rem;
+    cursor: move;
+    animation: ornamentPlace 0.3s ease-out;
+}
+
+.gingerbread-options {
+    flex: 1;
+    min-width: 250px;
+}
+
+.decoration-btns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.decoration-btns button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.decoration-btns button:hover {
+    transform: scale(1.05);
+    border-color: var(--christmas-gold);
+}
+
+/* Footer */
+.christmas-footer {
+    background: linear-gradient(90deg, var(--christmas-dark-red), var(--christmas-dark-green));
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-top: 4rem;
+    border-top: 3px solid var(--christmas-gold);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-decoration {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-content p {
+    margin: 0.5rem 0;
+    color: var(--christmas-light-gold);
+}
+
+.footer-links {
+    margin-top: 2rem;
+}
+
+.footer-links a {
+    color: var(--christmas-gold);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--christmas-white);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .countdown {
+        gap: 1rem;
+    }
+
+    .countdown-item {
+        min-width: 80px;
+        padding: 1rem;
+    }
+
+    .countdown-value {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .advent-calendar {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+
+    .activities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .decorator-container,
+    .card-creator,
+    .gingerbread-container {
+        flex-direction: column;
+    }
+
+    .card-preview {
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--christmas-dark-green);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--christmas-gold);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--christmas-red);
+}
