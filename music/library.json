@@ -35,6 +35,16 @@
         "year": 2024,
         "file": "sample-game-over.flac",
         "cover": "covers/game-over.jpg"
+      },
+      {
+        "id": "submission-1768946593493",
+        "title": "Keshi - drunk",
+        "artist": "03",
+        "album": "Keshi 2.0",
+        "genre": "",
+        "year": null,
+        "file": "03_-_keshi_-_drunk.flac",
+        "duration": 0
       }
     ],
     "playlists": [
