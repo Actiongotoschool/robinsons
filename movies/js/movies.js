@@ -240,7 +240,7 @@ const MoviesSystem = (function() {
             modal.remove();
             // Refresh current view
             if (window.currentGenre) {
-                displayMovies(window.currentGenre, MovieDatabase[window.currentGenre]);
+                refreshCurrentView();
             }
         });
 
@@ -249,7 +249,7 @@ const MoviesSystem = (function() {
             modal.remove();
             // Refresh current view
             if (window.currentGenre) {
-                displayMovies(window.currentGenre, MovieDatabase[window.currentGenre]);
+                refreshCurrentView();
             }
         });
 
@@ -317,6 +317,32 @@ const MoviesSystem = (function() {
     }
 
     /**
+     * Refresh the current view based on the genre
+     */
+    function refreshCurrentView() {
+        if (!window.currentGenre) return;
+        
+        let movies;
+        switch (window.currentGenre) {
+            case 'favorites':
+                movies = getFavoriteMovies();
+                break;
+            case 'watched':
+                movies = getWatchedMovies();
+                break;
+            case 'search':
+                // Don't refresh search results automatically
+                return;
+            default:
+                movies = MovieDatabase[window.currentGenre];
+        }
+        
+        if (movies) {
+            displayMovies(window.currentGenre, movies);
+        }
+    }
+
+    /**
      * Handle search input
      */
     function handleSearch(event) {
@@ -341,9 +367,7 @@ const MoviesSystem = (function() {
         saveToStorage();
         
         // Re-display current genre
-        if (window.currentGenre) {
-            displayMovies(window.currentGenre, MovieDatabase[window.currentGenre]);
-        }
+        refreshCurrentView();
     }
 
     /**
@@ -359,9 +383,7 @@ const MoviesSystem = (function() {
         });
 
         // Re-display current genre
-        if (window.currentGenre) {
-            displayMovies(window.currentGenre, MovieDatabase[window.currentGenre]);
-        }
+        refreshCurrentView();
     }
 
     /**
