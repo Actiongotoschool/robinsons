@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Movies - Robinsons</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="css/movies.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+</head>
+<body>
+    <div class="movies-container">
+        <header class="movies-header">
+            <h1>🔍 Search Movies</h1>
+            <p class="tagline">Find your next favorite film</p>
+        </header>
+
+        <nav class="movies-nav">
+            <a href="index.html" class="back-link">
+                <span>←</span>
+                <span>All Genres</span>
+            </a>
+            
+            <div class="movies-controls" style="width: 100%;">
+                <div class="search-box" style="flex: 2;">
+                    <input type="text" id="global-search-input" placeholder="Search by title, director, cast, or plot..." autofocus>
+                </div>
+                
+                <select id="sort-by" class="sort-select">
+                    <option value="rating">Sort by Rating</option>
+                    <option value="year">Sort by Year</option>
+                    <option value="title">Sort by Title</option>
+                </select>
+                
+                <div class="view-toggle">
+                    <button class="view-toggle-btn active" data-view="grid">📱 Grid</button>
+                    <button class="view-toggle-btn" data-view="list">📋 List</button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="search-stats" style="text-align: center; padding: 20px; color: var(--text-secondary); display: none;">
+            <p id="search-results-text"></p>
+        </div>
+
+        <main id="movie-grid" class="movie-grid grid-view">
+            <!-- Movies will be dynamically inserted here -->
+        </main>
+
+        <div id="search-prompt" class="empty-state">
+            <div class="empty-state-icon">🎬</div>
+            <h3>Start Your Search</h3>
+            <p>Enter a movie title, director name, actor, or keyword to find movies</p>
+            <div style="margin-top: 30px;">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Popular searches:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
+                    <button class="search-suggestion" data-query="nolan">Nolan</button>
+                    <button class="search-suggestion" data-query="thriller">Thriller</button>
+                    <button class="search-suggestion" data-query="space">Space</button>
+                    <button class="search-suggestion" data-query="love">Love</button>
+                    <button class="search-suggestion" data-query="2014">2014</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="no-results" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">😕</div>
+            <h3>No Results Found</h3>
+            <p>Try different keywords or browse by genre</p>
+            <a href="index.html" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--accent-primary); color: white; text-decoration: none; border-radius: 12px; font-weight: 600;">Browse All Genres</a>
+        </div>
+
+        <footer style="text-align: center; padding: 40px 20px; color: var(--text-secondary);">
+            <p>© 2024 Robinsons - Movie data sourced from IMDb</p>
+        </footer>
+    </div>
+
+    <script src="js/movie-data.js"></script>
+    <script src="js/movies.js"></script>
+    <script>
+        const searchInput = document.getElementById('global-search-input');
+        const movieGrid = document.getElementById('movie-grid');
+        const searchPrompt = document.getElementById('search-prompt');
+        const noResults = document.getElementById('no-results');
+        const searchStats = document.getElementById('search-stats');
+        const searchResultsText = document.getElementById('search-results-text');
+
+        // Search functionality
+        function performSearch(query) {
+            if (!query || query.trim() === '') {
+                movieGrid.style.display = 'none';
+                searchPrompt.style.display = 'block';
+                noResults.style.display = 'none';
+                searchStats.style.display = 'none';
+                return;
+            }
+
+            const results = MoviesSystem.searchAllMovies(query);
+            
+            searchPrompt.style.display = 'none';
+            
+            if (results.length === 0) {
+                movieGrid.style.display = 'none';
+                noResults.style.display = 'block';
+                searchStats.style.display = 'none';
+            } else {
+                movieGrid.style.display = 'grid';
+                noResults.style.display = 'none';
+                searchStats.style.display = 'block';
+                searchResultsText.textContent = `Found ${results.length} movie${results.length !== 1 ? 's' : ''} matching "${query}"`;
+                
+                window.currentGenre = 'search';
+                MoviesSystem.displayMovies('search', results);
+            }
+        }
+
+        // Listen for search input
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value;
+            performSearch(query);
+        });
+
+        // Search suggestions
+        document.querySelectorAll('.search-suggestion').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const query = this.dataset.query;
+                searchInput.value = query;
+                performSearch(query);
+            });
+        });
+
+        // Style search suggestions
+        const style = document.createElement('style');
+        style.textContent = `
+            .search-suggestion {
+                padding: 8px 16px;
+                background: var(--bg-card);
+                border: 2px solid var(--border-color);
+                color: var(--text-primary);
+                border-radius: 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 0.9rem;
+            }
+            .search-suggestion:hover {
+                background: var(--accent-primary);
+                border-color: var(--accent-primary);
+                color: white;
+                transform: translateY(-2px);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

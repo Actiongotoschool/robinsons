@@ -22,9 +22,18 @@
             </a>
             
             <div class="movies-controls">
-                <div class="search-box">
-                    <input type="text" id="global-search" placeholder="Search all movies...">
-                </div>
+                <a href="search.html" style="padding: 12px 24px; background: var(--accent-primary); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                    <span>🔍</span>
+                    <span>Search Movies</span>
+                </a>
+                <a href="favorites.html" style="padding: 12px 24px; background: var(--accent-danger); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                    <span>❤️</span>
+                    <span>My Favorites</span>
+                </a>
+                <a href="watched.html" style="padding: 12px 24px; background: var(--accent-success); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                    <span>✓</span>
+                    <span>Watched</span>
+                </a>
             </div>
         </nav>
 
@@ -96,24 +105,5 @@
 
     <script src="js/movie-data.js"></script>
     <script src="js/movies.js"></script>
-    <script>
-        // Global search functionality
-        document.getElementById('global-search').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.genre-card');
-            
-            if (query === '') {
-                cards.forEach(card => card.style.display = '');
-                return;
-            }
-            
-            cards.forEach(card => {
-                const title = card.querySelector('h2').textContent.toLowerCase();
-                const desc = card.querySelector('p').textContent.toLowerCase();
-                const matches = title.includes(query) || desc.includes(query);
-                card.style.display = matches ? '' : 'none';
-            });
-        });
-    </script>
 </body>
 </html>
