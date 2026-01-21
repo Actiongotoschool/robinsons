@@ -4,7 +4,7 @@
  */
 
 /* Import arcade theme variables */
-@import url('../css/main.css');
+@import url('../../css/main.css');
 
 /* Movie Page Layout */
 .movies-container {
@@ -683,4 +683,23 @@
 
 .empty-state p {
     color: var(--text-secondary);
+}
+
+/* Search Suggestions */
+.search-suggestion {
+    padding: 8px 16px;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.search-suggestion:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+    transform: translateY(-2px);
 }

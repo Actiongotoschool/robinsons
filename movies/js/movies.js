@@ -11,6 +11,9 @@ const MoviesSystem = (function() {
         settings: 'robinsons_movie_settings'
     };
 
+    // Fallback poster image (SVG placeholder)
+    const FALLBACK_POSTER = (title) => `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 450'%3E%3Crect fill='%231e293b' width='300' height='450'/%3E%3Ctext x='50%25' y='50%25' fill='%2394a3b8' font-size='24' text-anchor='middle' dy='.3em'%3E${encodeURIComponent(title)}%3C/text%3E%3C/svg%3E`;
+
     // State
     let favorites = [];
     let watched = [];
@@ -147,7 +150,7 @@ const MoviesSystem = (function() {
             </button>
             ${isWatched ? '<span class="watched-badge" title="Watched">✓</span>' : ''}
             <div class="movie-poster">
-                <img src="${movie.poster}" alt="${movie.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 450%22%3E%3Crect fill=%22%231e293b%22 width=%22300%22 height=%22450%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%2394a3b8%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3E${movie.title}%3C/text%3E%3C/svg%3E'">
+                <img src="${movie.poster}" alt="${movie.title}" onerror="this.src='${FALLBACK_POSTER(movie.title)}'">
                 <div class="movie-rating">⭐ ${movie.rating}</div>
             </div>
             <div class="movie-info">

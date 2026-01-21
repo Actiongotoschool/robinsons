@@ -128,28 +128,6 @@
                 performSearch(query);
             });
         });
-
-        // Style search suggestions
-        const style = document.createElement('style');
-        style.textContent = `
-            .search-suggestion {
-                padding: 8px 16px;
-                background: var(--bg-card);
-                border: 2px solid var(--border-color);
-                color: var(--text-primary);
-                border-radius: 20px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                font-size: 0.9rem;
-            }
-            .search-suggestion:hover {
-                background: var(--accent-primary);
-                border-color: var(--accent-primary);
-                color: white;
-                transform: translateY(-2px);
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
