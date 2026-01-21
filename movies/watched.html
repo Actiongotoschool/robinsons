@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch History - Robinsons</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="css/movies.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✓</text></svg>">
+</head>
+<body>
+    <div class="movies-container">
+        <header class="movies-header">
+            <h1>✓ Watched Movies</h1>
+            <p class="tagline">Your viewing history</p>
+        </header>
+
+        <nav class="movies-nav">
+            <a href="index.html" class="back-link">
+                <span>←</span>
+                <span>All Genres</span>
+            </a>
+            
+            <div class="movies-controls">
+                <div class="search-box">
+                    <input type="text" id="movie-search" placeholder="Search watched movies...">
+                </div>
+                
+                <select id="sort-by" class="sort-select">
+                    <option value="rating">Sort by Rating</option>
+                    <option value="year">Sort by Year</option>
+                    <option value="title">Sort by Title</option>
+                </select>
+                
+                <div class="view-toggle">
+                    <button class="view-toggle-btn active" data-view="grid">📱 Grid</button>
+                    <button class="view-toggle-btn" data-view="list">📋 List</button>
+                </div>
+            </div>
+        </nav>
+
+        <main id="movie-grid" class="movie-grid grid-view">
+            <!-- Movies will be dynamically inserted here -->
+        </main>
+
+        <div id="empty-watched" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">📺</div>
+            <h3>No watched movies yet</h3>
+            <p>Mark movies as watched by clicking the checkmark button in the movie details!</p>
+            <a href="index.html" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--accent-primary); color: white; text-decoration: none; border-radius: 12px; font-weight: 600;">Browse Movies</a>
+        </div>
+
+        <footer style="text-align: center; padding: 40px 20px; color: var(--text-secondary);">
+            <p>© 2024 Robinsons - Movie data sourced from IMDb</p>
+        </footer>
+    </div>
+
+    <script src="js/movie-data.js"></script>
+    <script src="js/movies.js"></script>
+    <script>
+        // Display watched movies when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const watchedMovies = MoviesSystem.getWatchedMovies();
+            
+            if (watchedMovies.length === 0) {
+                document.getElementById('movie-grid').style.display = 'none';
+                document.getElementById('empty-watched').style.display = 'block';
+            } else {
+                document.getElementById('movie-grid').style.display = 'grid';
+                document.getElementById('empty-watched').style.display = 'none';
+                window.currentGenre = 'watched';
+                MoviesSystem.displayMovies('watched', watchedMovies);
+            }
+        });
+    </script>
+</body>
+</html>
