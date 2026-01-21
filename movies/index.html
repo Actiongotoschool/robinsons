@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations - Robinsons</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="css/movies.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+    <div class="movies-container">
+        <header class="movies-header">
+            <h1>🎬 Movie Recommendations</h1>
+            <p class="tagline">Discover great films organized by genre</p>
+        </header>
+
+        <nav class="movies-nav">
+            <a href="../index.html" class="back-link">
+                <span>←</span>
+                <span>Back to Arcade</span>
+            </a>
+            
+            <div class="movies-controls">
+                <div class="search-box">
+                    <input type="text" id="global-search" placeholder="Search all movies...">
+                </div>
+            </div>
+        </nav>
+
+        <main class="genre-grid" id="genre-grid">
+            <!-- Action Genre -->
+            <a href="genres/action.html" class="genre-card" data-genre="action">
+                <span class="genre-emoji">💥</span>
+                <h2>Action</h2>
+                <p>High-octane thrills, explosive sequences, and heart-pounding adventures</p>
+                <span class="genre-count">6 movies</span>
+            </a>
+
+            <!-- Comedy Genre -->
+            <a href="genres/comedy.html" class="genre-card" data-genre="comedy">
+                <span class="genre-emoji">😂</span>
+                <h2>Comedy</h2>
+                <p>Laughter, wit, and feel-good moments that brighten your day</p>
+                <span class="genre-count">6 movies</span>
+            </a>
+
+            <!-- Drama Genre -->
+            <a href="genres/drama.html" class="genre-card" data-genre="drama">
+                <span class="genre-emoji">🎭</span>
+                <h2>Drama</h2>
+                <p>Compelling stories that explore the depth of human emotion</p>
+                <span class="genre-count">6 movies</span>
+            </a>
+
+            <!-- Horror Genre -->
+            <a href="genres/horror.html" class="genre-card" data-genre="horror">
+                <span class="genre-emoji">👻</span>
+                <h2>Horror</h2>
+                <p>Spine-chilling tales that will keep you up at night</p>
+                <span class="genre-count">6 movies</span>
+            </a>
+
+            <!-- Sci-Fi Genre -->
+            <a href="genres/scifi.html" class="genre-card" data-genre="scifi">
+                <span class="genre-emoji">🚀</span>
+                <h2>Sci-Fi</h2>
+                <p>Journey beyond reality into worlds of imagination and possibility</p>
+                <span class="genre-count">6 movies</span>
+            </a>
+
+            <!-- Romance Genre -->
+            <a href="genres/romance.html" class="genre-card" data-genre="romance">
+                <span class="genre-emoji">❤️</span>
+                <h2>Romance</h2>
+                <p>Love stories that touch the heart and warm the soul</p>
+                <span class="genre-count">6 movies</span>
+            </a>
+
+            <!-- Thriller Genre -->
+            <a href="genres/thriller.html" class="genre-card" data-genre="thriller">
+                <span class="genre-emoji">🔪</span>
+                <h2>Thriller</h2>
+                <p>Edge-of-your-seat suspense that keeps you guessing</p>
+                <span class="genre-count">6 movies</span>
+            </a>
+        </main>
+
+        <footer style="text-align: center; padding: 40px 20px; color: var(--text-secondary);">
+            <p>© 2024 Robinsons - Movie data sourced from IMDb</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">
+                42 movies available across 7 genres
+            </p>
+        </footer>
+    </div>
+
+    <script src="js/movie-data.js"></script>
+    <script src="js/movies.js"></script>
+    <script>
+        // Global search functionality
+        document.getElementById('global-search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.genre-card');
+            
+            if (query === '') {
+                cards.forEach(card => card.style.display = '');
+                return;
+            }
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h2').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                const matches = title.includes(query) || desc.includes(query);
+                card.style.display = matches ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
